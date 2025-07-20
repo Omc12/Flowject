@@ -4,10 +4,11 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-const PORT = 5001;
-const JWT_SECRET = 'your-secret-key';
+const PORT = process.env.PORT || 5001;
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || '*';
 
-app.use(cors());
+app.use(cors({ origin: CLIENT_ORIGIN, credentials: true }));
 app.use(express.json());
 
 let users = [];
@@ -165,6 +166,10 @@ app.delete('/api/tasks/:id', authenticateToken, (req, res) => {
 
   tasks.splice(taskIndex, 1);
   res.json({ message: 'Task deleted' });
+});
+
+app.get('/', (req, res) => {
+  res.send('Backend is running!');
 });
 
 app.listen(PORT, () => {
