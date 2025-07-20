@@ -5,6 +5,7 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Projects from './components/Projects';
 import Tasks from './components/Tasks';
+import Analytics from './components/Analytics';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './App.css';
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
             <Route path="/projects" element={<PrivateRoute><Projects /></PrivateRoute>} />
             <Route path="/tasks" element={<PrivateRoute><Tasks /></PrivateRoute>} />
+            <Route path="/analytics" element={<PrivateRoute><Analytics /></PrivateRoute>} />
           </Routes>
         </div>
       </Router>

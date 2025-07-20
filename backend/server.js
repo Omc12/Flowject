@@ -172,6 +172,14 @@ app.delete('/api/tasks/:id', authenticateToken, (req, res) => {
   res.json({ message: 'Task deleted' });
 });
 
+app.get('/api/analytics', (req, res) => {
+  res.json({
+    totalUsers: users.length,
+    totalProjects: projects.length,
+    totalTasks: tasks.length
+  });
+});
+
 app.get('/', (req, res) => {
   res.send('Backend is running!');
 });
