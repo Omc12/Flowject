@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs'); 
 const jwt = require('jsonwebtoken');
 
 const app = express();
@@ -177,6 +177,24 @@ app.get('/api/analytics', (req, res) => {
     totalUsers: users.length,
     totalProjects: projects.length,
     totalTasks: tasks.length
+  });
+});
+
+app.get('/api/user-analytics', authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+  const userTasks = tasks.filter(task => task.userId === userId);
+  const completed = userTasks.filter(task => task.status === 'completed').length;
+  const remaining = userTasks.length - completed;
+  const priorities = {
+    high: userTasks.filter(task => task.priority === 'high').length,
+    medium: userTasks.filter(task => task.priority === 'medium').length,
+    low: userTasks.filter(task => task.priority === 'low').length,
+  };
+  res.json({
+    total: userTasks.length,
+    completed,
+    remaining,
+    priorities
   });
 });
 

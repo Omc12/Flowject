@@ -25,7 +25,7 @@ function App() {
             <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
             <Route path="/projects" element={<PrivateRoute><Projects /></PrivateRoute>} />
             <Route path="/tasks" element={<PrivateRoute><Tasks /></PrivateRoute>} />
-            <Route path="/analytics" element={<PrivateRoute><Analytics /></PrivateRoute>} />
+            <Route path="/analytics" element={<Analytics />} />
           </Routes>
         </div>
       </Router>

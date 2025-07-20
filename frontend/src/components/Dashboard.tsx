@@ -224,6 +224,12 @@ const Dashboard: React.FC = () => {
           >
             Manage Tasks
           </Link>
+          <Link
+            to="/analytics"
+            className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition duration-200 font-medium"
+          >
+            View Analytics
+          </Link>
         </div>
       </div>
     </div>
