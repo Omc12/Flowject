@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +19,7 @@ const Login: React.FC = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5001/api/login', {
+      const response = await axios.post(`${API_BASE_URL}/api/login`, {
         email,
         password
       });

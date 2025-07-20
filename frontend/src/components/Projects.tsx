@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 interface Project {
   id: string;
   name: string;
@@ -31,7 +33,7 @@ const Projects: React.FC = () => {
   const fetchProjects = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5001/api/projects', {
+      const response = await axios.get(`${API_BASE_URL}/api/projects`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProjects(response.data);
@@ -49,9 +51,9 @@ const Projects: React.FC = () => {
       const headers = { Authorization: `Bearer ${token}` };
 
       if (editingProject) {
-        await axios.put(`http://localhost:5001/api/projects/${editingProject.id}`, formData, { headers });
+        await axios.put(`${API_BASE_URL}/api/projects/${editingProject.id}`, formData, { headers });
       } else {
-        await axios.post('http://localhost:5001/api/projects', formData, { headers });
+        await axios.post(`${API_BASE_URL}/api/projects`, formData, { headers });
       }
 
       setShowModal(false);
@@ -77,7 +79,7 @@ const Projects: React.FC = () => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:5001/api/projects/${id}`, {
+        await axios.delete(`${API_BASE_URL}/api/projects/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         fetchProjects();

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 interface Project {
   id: string;
   name: string;
@@ -38,8 +40,8 @@ const Dashboard: React.FC = () => {
       const headers = { Authorization: `Bearer ${token}` };
 
       const [projectsRes, tasksRes] = await Promise.all([
-        axios.get('http://localhost:5001/api/projects', { headers }),
-        axios.get('http://localhost:5001/api/tasks', { headers })
+        axios.get(`${API_BASE_URL}/api/projects`, { headers }),
+        axios.get(`${API_BASE_URL}/api/tasks`, { headers })
       ]);
 
       setProjects(projectsRes.data);

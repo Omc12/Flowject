@@ -8,7 +8,11 @@ const PORT = process.env.PORT || 5001;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || '*';
 
-app.use(cors({ origin: CLIENT_ORIGIN, credentials: true }));
+app.use(cors({ 
+  origin: CLIENT_ORIGIN,
+  credentials: true 
+}));
+
 app.use(express.json());
 
 let users = [];

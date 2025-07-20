@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 interface Task {
   id: string;
   title: string;
@@ -44,8 +46,8 @@ const Tasks: React.FC = () => {
       const headers = { Authorization: `Bearer ${token}` };
 
       const [tasksRes, projectsRes] = await Promise.all([
-        axios.get('http://localhost:5001/api/tasks', { headers }),
-        axios.get('http://localhost:5001/api/projects', { headers })
+        axios.get(`${API_BASE_URL}/api/tasks`, { headers }),
+        axios.get(`${API_BASE_URL}/api/projects`, { headers })
       ]);
 
       setTasks(tasksRes.data);
@@ -64,9 +66,9 @@ const Tasks: React.FC = () => {
       const headers = { Authorization: `Bearer ${token}` };
 
       if (editingTask) {
-        await axios.put(`http://localhost:5001/api/tasks/${editingTask.id}`, formData, { headers });
+        await axios.put(`${API_BASE_URL}/api/tasks/${editingTask.id}`, formData, { headers });
       } else {
-        await axios.post('http://localhost:5001/api/tasks', formData, { headers });
+        await axios.post(`${API_BASE_URL}/api/tasks`, formData, { headers });
       }
 
       setShowModal(false);
@@ -94,7 +96,7 @@ const Tasks: React.FC = () => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:5001/api/tasks/${id}`, {
+        await axios.delete(`${API_BASE_URL}/api/tasks/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         fetchData();
