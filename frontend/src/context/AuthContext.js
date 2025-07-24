@@ -14,16 +14,17 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const savedToken = localStorage.getItem('token');
     const savedUser = localStorage.getItem('user');
-    
     if (savedToken && savedUser) {
       setToken(savedToken);
       setUser(JSON.parse(savedUser));
       setIsAuthenticated(true);
     }
+    setLoading(false);
   }, []);
 
   const login = (newToken, newUser) => {
@@ -41,6 +42,10 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
   };
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">Loading...</div>;
+  }
 
   return (
     <AuthContext.Provider value={{ user, token, isAuthenticated, login, logout }}>

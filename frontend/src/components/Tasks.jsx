@@ -125,23 +125,23 @@ const Tasks = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm border-b">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <nav className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-8">
-              <Link to="/" className="text-2xl font-bold text-gray-900">ProjectHub</Link>
+              <Link to="/" className="text-2xl font-bold text-gray-900 dark:text-gray-100">Flowject</Link>
               <div className="flex space-x-4">
-                <Link to="/" className="text-gray-600 hover:text-gray-900">Dashboard</Link>
-                <Link to="/projects" className="text-gray-600 hover:text-gray-900">Projects</Link>
-                <Link to="/tasks" className="text-blue-600 font-medium">Tasks</Link>
+                <Link to="/" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Dashboard</Link>
+                <Link to="/projects" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Projects</Link>
+                <Link to="/tasks" className="text-blue-600 dark:text-blue-400 font-medium">Tasks</Link>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-gray-700">Welcome, {user?.username}!</span>
+              <span className="text-gray-700 dark:text-gray-200">Welcome, {user?.username}!</span>
               <button
                 onClick={logout}
-                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200"
+                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200 shadow-md"
               >
                 Logout
               </button>
@@ -152,10 +152,10 @@ const Tasks = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Tasks</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Tasks</h1>
           <button
             onClick={() => setShowModal(true)}
-            className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-200 font-medium"
+            className="bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800 text-white px-6 py-3 rounded-lg transition duration-200 font-medium shadow-md"
           >
             Add New Task
           </button>
@@ -163,20 +163,16 @@ const Tasks = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {tasks.map((task) => (
-            <div key={task.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div key={task.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-300">
               <div className="flex justify-between items-start mb-4">
-                <h3 className="text-xl font-semibold text-gray-900">{task.title}</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">{task.title}</h3>
                 <div className="flex flex-col items-end space-y-1">
-                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(task.status)}`}>
-                    {task.status}
-                  </span>
-                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${getPriorityColor(task.priority)}`}>
-                    {task.priority}
-                  </span>
+                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(task.status)}`}>{task.status}</span>
+                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${getPriorityColor(task.priority)}`}>{task.priority}</span>
                 </div>
               </div>
-              <p className="text-gray-600 mb-4">{task.description}</p>
-              <div className="text-sm text-gray-500 mb-4 space-y-1">
+              <p className="text-gray-600 dark:text-gray-300 mb-4">{task.description}</p>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-4 space-y-1">
                 <p>Project: {getProjectName(task.projectId)}</p>
                 <p>Due: {new Date(task.dueDate).toLocaleDateString()}</p>
                 <p>Created: {new Date(task.createdAt).toLocaleDateString()}</p>
@@ -184,13 +180,13 @@ const Tasks = () => {
               <div className="flex space-x-2">
                 <button
                   onClick={() => handleEdit(task)}
-                  className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200 text-sm"
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white px-4 py-2 rounded-lg transition duration-200 text-sm shadow-md"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(task.id)}
-                  className="flex-1 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200 text-sm"
+                  className="flex-1 bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800 text-white px-4 py-2 rounded-lg transition duration-200 text-sm shadow-md"
                 >
                   Delete
                 </button>
@@ -201,16 +197,16 @@ const Tasks = () => {
 
         {tasks.length === 0 && (
           <div className="text-center py-12">
-            <div className="text-gray-400 mb-4">
+            <div className="text-gray-400 dark:text-gray-500 mb-4">
               <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
               </svg>
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No tasks yet</h3>
-            <p className="text-gray-600 mb-4">Get started by creating your first task</p>
+            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No tasks yet</h3>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">Get started by creating your first task</p>
             <button
               onClick={() => setShowModal(true)}
-              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-200 font-medium"
+              className="bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800 text-white px-6 py-3 rounded-lg transition duration-200 font-medium shadow-md"
             >
               Create Task
             </button>
@@ -220,37 +216,37 @@ const Tasks = () => {
 
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-md w-full p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
               {editingTask ? 'Edit Task' : 'Add New Task'}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Task Title</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Task Title</label>
                 <input
                   type="text"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Description</label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                   rows={3}
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Project</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Project</label>
                 <select
                   value={formData.projectId}
                   onChange={(e) => setFormData({ ...formData, projectId: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                   required
                 >
                   <option value="">Select a project</option>
@@ -262,11 +258,11 @@ const Tasks = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Priority</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Priority</label>
                 <select
                   value={formData.priority}
                   onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                   required
                 >
                   <option value="low">Low</option>
@@ -275,19 +271,19 @@ const Tasks = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Due Date</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Due Date</label>
                 <input
                   type="date"
                   value={formData.dueDate}
                   onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                   required
                 />
               </div>
               <div className="flex space-x-4 pt-4">
                 <button
                   type="submit"
-                  className="flex-1 bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition duration-200 font-medium"
+                  className="flex-1 bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800 text-white py-3 px-4 rounded-lg transition duration-200 font-medium shadow-md"
                 >
                   {editingTask ? 'Update' : 'Create'}
                 </button>
@@ -298,7 +294,7 @@ const Tasks = () => {
                     setEditingTask(null);
                     setFormData({ title: '', description: '', projectId: '', priority: 'medium', dueDate: '' });
                   }}
-                  className="flex-1 bg-gray-300 text-gray-700 py-3 px-4 rounded-lg hover:bg-gray-400 transition duration-200 font-medium"
+                  className="flex-1 bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 py-3 px-4 rounded-lg transition duration-200 font-medium"
                 >
                   Cancel
                 </button>

@@ -52,56 +52,56 @@ const Analytics = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center px-4 py-8">
-      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex flex-col items-center justify-center px-4 py-8">
+      <div className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-bold text-gray-900">Your Task Analytics</h2>
-          <Link to="/" className="text-blue-600 hover:text-blue-800 font-medium">Dashboard</Link>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Your Task Analytics</h2>
+          <Link to="/" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium">Dashboard</Link>
         </div>
         {loading ? (
           <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading analytics...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400 mx-auto mb-4"></div>
+            <p className="text-gray-600 dark:text-gray-300">Loading analytics...</p>
           </div>
         ) : data ? (
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-blue-100 rounded-xl p-6 text-center">
-                <div className="text-4xl font-bold text-blue-600">{data.total}</div>
-                <div className="text-gray-700 mt-2">Total Tasks</div>
+              <div className="bg-blue-100 dark:bg-blue-900 rounded-xl p-6 text-center">
+                <div className="text-4xl font-bold text-blue-600 dark:text-blue-300">{data.total}</div>
+                <div className="text-gray-700 dark:text-gray-200 mt-2">Total Tasks</div>
               </div>
-              <div className="bg-green-100 rounded-xl p-6 text-center">
-                <div className="text-4xl font-bold text-green-600">{data.completed}</div>
-                <div className="text-gray-700 mt-2">Completed</div>
+              <div className="bg-green-100 dark:bg-green-900 rounded-xl p-6 text-center">
+                <div className="text-4xl font-bold text-green-600 dark:text-green-300">{data.completed}</div>
+                <div className="text-gray-700 dark:text-gray-200 mt-2">Completed</div>
               </div>
-              <div className="bg-yellow-100 rounded-xl p-6 text-center">
-                <div className="text-4xl font-bold text-yellow-600">{data.remaining}</div>
-                <div className="text-gray-700 mt-2">Remaining</div>
+              <div className="bg-yellow-100 dark:bg-yellow-900 rounded-xl p-6 text-center">
+                <div className="text-4xl font-bold text-yellow-600 dark:text-yellow-300">{data.remaining}</div>
+                <div className="text-gray-700 dark:text-gray-200 mt-2">Remaining</div>
               </div>
             </div>
-            <div className="bg-gray-50 rounded-xl p-6 flex flex-col items-center">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Tasks by Priority</h3>
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-6 flex flex-col items-center">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Tasks by Priority</h3>
               <div className="w-64 h-64">
                 <Doughnut data={doughnutData} />
               </div>
               <div className="flex justify-center gap-8 mt-6">
                 <div className="flex items-center gap-2">
                   <span className="inline-block w-4 h-4 rounded-full bg-red-500"></span>
-                  <span className="text-gray-700">High: {data.priorities.high}</span>
+                  <span className="text-gray-700 dark:text-gray-200">High: {data.priorities.high}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="inline-block w-4 h-4 rounded-full bg-yellow-400"></span>
-                  <span className="text-gray-700">Medium: {data.priorities.medium}</span>
+                  <span className="text-gray-700 dark:text-gray-200">Medium: {data.priorities.medium}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="inline-block w-4 h-4 rounded-full bg-green-500"></span>
-                  <span className="text-gray-700">Low: {data.priorities.low}</span>
+                  <span className="text-gray-700 dark:text-gray-200">Low: {data.priorities.low}</span>
                 </div>
               </div>
             </div>
           </>
         ) : (
-          <div className="text-center text-red-600">Failed to load analytics data.</div>
+          <div className="text-center text-red-600 dark:text-red-400">Failed to load analytics data.</div>
         )}
       </div>
     </div>
