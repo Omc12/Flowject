@@ -5,29 +5,13 @@ import { useAuth } from '../context/AuthContext';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL;
 
-interface Task {
-  id: string;
-  title: string;
-  description: string;
-  status: string;
-  priority: string;
-  dueDate: string;
-  projectId: string;
-  createdAt: string;
-}
-
-interface Project {
-  id: string;
-  name: string;
-}
-
-const Tasks: React.FC = () => {
+const Tasks = () => {
   const { user, logout } = useAuth();
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [tasks, setTasks] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [editingTask, setEditingTask] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -59,7 +43,7 @@ const Tasks: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
@@ -80,7 +64,7 @@ const Tasks: React.FC = () => {
     }
   };
 
-  const handleEdit = (task: Task) => {
+  const handleEdit = (task) => {
     setEditingTask(task);
     setFormData({
       title: task.title,
@@ -92,7 +76,7 @@ const Tasks: React.FC = () => {
     setShowModal(true);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
         const token = localStorage.getItem('token');
@@ -106,7 +90,7 @@ const Tasks: React.FC = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case 'completed': return 'bg-green-100 text-green-800';
       case 'in-progress': return 'bg-blue-100 text-blue-800';
@@ -115,7 +99,7 @@ const Tasks: React.FC = () => {
     }
   };
 
-  const getPriorityColor = (priority: string) => {
+  const getPriorityColor = (priority) => {
     switch (priority) {
       case 'high': return 'bg-red-100 text-red-800';
       case 'medium': return 'bg-yellow-100 text-yellow-800';
@@ -124,7 +108,7 @@ const Tasks: React.FC = () => {
     }
   };
 
-  const getProjectName = (projectId: string) => {
+  const getProjectName = (projectId) => {
     const project = projects.find(p => p.id === projectId);
     return project ? project.name : 'Unknown Project';
   };

@@ -9,7 +9,7 @@ import Analytics from './components/Analytics';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './App.css';
 
-const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
+const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
 };

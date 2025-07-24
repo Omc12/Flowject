@@ -5,21 +5,12 @@ import { useAuth } from '../context/AuthContext';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL;
 
-interface Project {
-  id: string;
-  name: string;
-  description: string;
-  status: string;
-  deadline: string;
-  createdAt: string;
-}
-
-const Projects: React.FC = () => {
+const Projects = () => {
   const { user, logout } = useAuth();
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [editingProject, setEditingProject] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -44,7 +35,7 @@ const Projects: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
@@ -65,7 +56,7 @@ const Projects: React.FC = () => {
     }
   };
 
-  const handleEdit = (project: Project) => {
+  const handleEdit = (project) => {
     setEditingProject(project);
     setFormData({
       name: project.name,
@@ -75,7 +66,7 @@ const Projects: React.FC = () => {
     setShowModal(true);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       try {
         const token = localStorage.getItem('token');
@@ -89,7 +80,7 @@ const Projects: React.FC = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case 'active': return 'bg-green-100 text-green-800';
       case 'completed': return 'bg-blue-100 text-blue-800';

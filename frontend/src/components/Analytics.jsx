@@ -8,20 +8,9 @@ Chart.register(ArcElement, Tooltip, Legend);
 
 const API_BASE_URL = process.env.REACT_APP_API_URL;
 
-interface UserAnalytics {
-  total: number;
-  completed: number;
-  remaining: number;
-  priorities: {
-    high: number;
-    medium: number;
-    low: number;
-  };
-}
-
-const Analytics: React.FC = () => {
+const Analytics = () => {
   const { token } = useAuth();
-  const [data, setData] = useState<UserAnalytics | null>(null);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

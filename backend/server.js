@@ -8,9 +8,20 @@ const PORT = process.env.PORT || 5001;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || '*';
 
-app.use(cors({ 
-  origin: CLIENT_ORIGIN,
-  credentials: true 
+const allowedOrigins = [
+  'https://flowject-f9fbe.web.app',
+  'http://localhost:3000'
+];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
 
 app.use(express.json());
